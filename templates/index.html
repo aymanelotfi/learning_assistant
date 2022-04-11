@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
+<head>
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+</head>
+<style>
+  form { display: inline; }
+</style>
 <h1 class="title">
     Learning Assistant
 </h1>
@@ -8,14 +14,18 @@
     Fibonacci spaced learning
 </h2>
 {% if current_user.is_authenticated %}
-<form action="/read" method="GET">
-<!-- <input type="submit" value="Edit today's file" style="font-family: Monaco; font-size: 20px"> -->
-  <button type="submit" class="btn btn-primary" value="Edit today's file">
-</form>
 <form action="/edit" method="GET">
-  <button type="submit" class="btn btn-primary" value="Start learning session">
+  <button type="submit" method="GET" class="btn btn-secondary">Start learning session</button>
 <!-- <input type="submit" value="Start learning session" style="font-family: Monaco; font-size: 20px"> -->
 </form>
+<form action="/read" method="GET">
+<!-- <input type="submit" value="Edit today's file" style="font-family: Monaco; font-size: 20px"> -->
+  <button type="submit" class="btn btn-primary">Edit today's file</button>
+</form>
+
+
+<!-- <button type="button" class="btn btn-primary">Primary</button> -->
+
 {% endif %}
 {% endblock %}
 
