@@ -1,5 +1,5 @@
-flask
+flask==2.0.3
 flask-sqlalchemy
-flask-login
+flask-login==0.6.0
 werkzeug
 pandas
