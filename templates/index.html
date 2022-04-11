@@ -9,10 +9,12 @@
 </h2>
 {% if current_user.is_authenticated %}
 <form action="/read" method="GET">
-<input type="submit" value="Edit today's file" style="font-family: Monaco; font-size: 20px">
+<!-- <input type="submit" value="Edit today's file" style="font-family: Monaco; font-size: 20px"> -->
+  <button type="submit" class="btn btn-primary" value="Edit today's file">
 </form>
 <form action="/edit" method="GET">
-<input type="submit" value="Start learning session" style="font-family: Monaco; font-size: 20px">
+  <button type="submit" class="btn btn-primary" value="Start learning session">
+<!-- <input type="submit" value="Start learning session" style="font-family: Monaco; font-size: 20px"> -->
 </form>
 {% endif %}
 {% endblock %}
