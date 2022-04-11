@@ -5,11 +5,15 @@
     Learning Assistant
 </h1>
 <h2 class="subtitle">
-    Learn it Now !
+    Fibonacci spaced learning
 </h2>
 {% if current_user.is_authenticated %}
-<input type="submit" value="Add something to learn" style="font-family: Monaco; font-size: 20px">
+<form action="/read" method="GET">
+<input type="submit" value="Edit today's file" style="font-family: Monaco; font-size: 20px">
+</form>
+<form action="/edit" method="GET">
 <input type="submit" value="Start learning session" style="font-family: Monaco; font-size: 20px">
+</form>
 {% endif %}
 {% endblock %}
 
