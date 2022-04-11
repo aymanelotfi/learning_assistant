@@ -1,13 +1,14 @@
 <html>
   <head>
-  <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
-  <link rel="stylesheet" type="text/css" href="/css/codemirror.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/static/css/codemirror.css"> -->
+  <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
   </head>
+  <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+  <!-- <script src="/static/js/codemirror.js"> </script> -->
+  <script src="/static/js/relearn.js"> </script>
 
-  <script src="/js/codemirror.js"> </script>
-  <script src="/js/relearn.js"> </script>
-
-  <textarea id="myTextarea">{{ text }}</textarea> 
+  <textarea id="myTextarea">{{ text }}</textarea>
 
   <script>relearnInit()</script>
 
