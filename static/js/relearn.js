@@ -1,4 +1,16 @@
+//
+// var http = 'http';
+//
+// // ES5
+// require([http], function(result){
+//     http = result;
+// });
 function relearnInit() {
+  var http = "http";
+  require([http], function(result){
+      http = result;
+  });
+
   // var textArea = document.getElementById("myTextarea");
   // var editor = CodeMirror.fromTextArea(textArea, {
   //   lineNumbers: true
