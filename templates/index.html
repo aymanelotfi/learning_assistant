@@ -14,11 +14,11 @@
     Fibonacci spaced learning
 </h2>
 {% if current_user.is_authenticated %}
-<form action="/edit" method="GET">
+<form action="/read" method="GET">
   <button type="submit" method="GET" class="btn btn-secondary">Start learning session</button>
 <!-- <input type="submit" value="Start learning session" style="font-family: Monaco; font-size: 20px"> -->
 </form>
-<form action="/read" method="GET">
+<form action="/edit" method="GET">
 <!-- <input type="submit" value="Edit today's file" style="font-family: Monaco; font-size: 20px"> -->
   <button type="submit" class="btn btn-primary">Edit today's file</button>
 </form>

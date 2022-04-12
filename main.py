@@ -1,7 +1,7 @@
 ########################################################################################
 ######################          Import packages      ###################################
 ########################################################################################
-from flask import Blueprint, render_template, flash
+from flask import Blueprint, render_template, flash, request
 from flask_login import login_required, current_user
 from __init__ import create_app, db
 from os import *
@@ -21,12 +21,14 @@ def index():
 def profile():
     return render_template('profile.html', name=current_user.name)
 
-@main.route('/edit') # edit today's file
+@main.route('/edit', methods=['POST', 'GET']) # edit today's file
 @login_required
 def edit():
 	id = current_user.id
 	cur_day = (date.today()-start_day).days
 	text = ""
+	if request.method == 'POST':
+		print(request)
 	if path.exists(f'./{id}/{id}_{cur_day}.md'):
 		text = openfile(f'./{id}/{id}_{cur_day}.md', "r").readlines()
 	return render_template("editor.html", text=text)
