@@ -4,7 +4,7 @@
 from flask import Blueprint, render_template, flash, request
 from flask_login import login_required, current_user
 from __init__ import create_app, db
-from os import path
+from os import path, mkdir
 from datetime import date
 
 ########################################################################################
