@@ -4,10 +4,13 @@
 from flask import Blueprint, render_template, flash
 from flask_login import login_required, current_user
 from __init__ import create_app, db
+from os import *
+from datetime import date
 
 ########################################################################################
 # our main blueprint
-main = Blueprint('main', __name__, static_folder = 'static', templates_folder = 'templates')
+main = Blueprint('main', __name__, static_folder = 'static', template_folder = 'templates')
+start_day = date(2022, 4, 12)
 
 @main.route('/') # home page that return 'index'
 def index():
@@ -21,12 +24,28 @@ def profile():
 @main.route('/edit') # edit today's file
 @login_required
 def edit():
-	return render_template("editor.html", text = "Todays's file")
+	id = current_user.id
+	cur_day = (date.today()-start_day).days
+	text = ""
+	if path.exists(f'./{id}/{id}_{cur_day}.md'):
+		text = openfile(f'./{id}/{id}_{cur_day}.md', "r").readlines()
+	return render_template("editor.html", text=text)
 
 @main.route('/read') # read today's recap
 @login_required
 def read():
-	return render_template("editor.html", text = "Recap todo")
+	text = ""
+	id = current_user.id
+	day = (date.today()-start_day).days-1
+	fn = 1
+	fnn = 1
+	while day >= 0:
+		if path.exists(f'./{id}/{id}_{day}.md'):
+			text += "Day " + str(day)+"\n\n"+openfile(f'./{id}/{id}_{day}.md', "r").readlines() + "\n\n"
+		day -= fnn
+		fnn += fn
+		fn = fnn
+	return render_template("editor.html", text=text)
 
 app = create_app() # we initialize our flask app using the __init__.py function
 if __name__ == '__main__':
