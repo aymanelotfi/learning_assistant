@@ -4,7 +4,7 @@
 from flask import Blueprint, render_template, flash, request
 from flask_login import login_required, current_user
 from __init__ import create_app, db
-from os import *
+from os import path
 from datetime import date
 
 ########################################################################################
@@ -24,29 +24,38 @@ def profile():
 @main.route('/edit', methods=['POST', 'GET']) # edit today's file
 @login_required
 def edit():
-	id = current_user.id
+	ID = current_user.id
 	cur_day = (date.today()-start_day).days
 	text = ""
 	if request.method == 'POST':
-		print(request)
-	if path.exists(f'./{id}/{id}_{cur_day}.md'):
-		text = openfile(f'./{id}/{id}_{cur_day}.md', "r").readlines()
+		text = [k for k in request.form.to_dict().keys()][0]
+		if not path.exists(f'./{ID}'):
+			mkdir(f'./{ID}')
+		f = open(f'./{ID}/{ID}_{cur_day}.md', "w")
+		f.write(text)
+		f.close()
+	if path.exists(f'./{ID}/{ID}_{cur_day}.md'):
+		text = open(f'./{ID}/{ID}_{cur_day}.md', "r").read()
 	return render_template("editor.html", text=text)
 
 @main.route('/read') # read today's recap
 @login_required
 def read():
-	text = ""
-	id = current_user.id
-	day = (date.today()-start_day).days-1
-	fn = 1
+	texts = []
+	ID = current_user.id
+	day = (date.today()-start_day).days
+	fn = 0
 	fnn = 1
 	while day >= 0:
-		if path.exists(f'./{id}/{id}_{day}.md'):
-			text += "Day " + str(day)+"\n\n"+openfile(f'./{id}/{id}_{day}.md', "r").readlines() + "\n\n"
+		if path.exists(f'./{ID}/{ID}_{day}.md'):
+			texts.append("**Day " + str(-day)+"**\n\n"+open(f'./{ID}/{ID}_{day}.md', "r").read() + "\n\n")
 		day -= fnn
 		fnn += fn
 		fn = fnn
+	texts.reverse()
+	text = ""
+	for d in texts:
+		text += d
 	return render_template("editor.html", text=text)
 
 app = create_app() # we initialize our flask app using the __init__.py function
