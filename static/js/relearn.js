@@ -6,16 +6,6 @@
 //     http = result;
 // });
 function relearnInit() {
-  var http = "http";
-  require([http], function(result){
-      http = result;
-  });
-
-  // var textArea = document.getElementById("myTextarea");
-  // var editor = CodeMirror.fromTextArea(textArea, {
-  //   lineNumbers: true
-  //   //mode: "htmlmixed"
-  // });
   const easyMDE = new EasyMDE({element: document.getElementById('myTextarea')});
   easyMDE.value();
   easyMDE.codemirror.on("change", () => {
@@ -34,11 +24,6 @@ function relearnInit() {
 
 		// send request
 		xhr.send(data);
-		// Send the proper header information along with the request
-	//	http.setRequestHeader("text/html; charset=UTF-8", "application/x-www-form-urlencoded");
-	//	http.setRequestHeader("Content-length", params.length);
-		// http.setRequestHeader("Connection", "close");
-		
 	  });
 
 }
