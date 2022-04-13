@@ -29,7 +29,7 @@ def edit():
 	text = ""
 	if request.method == 'POST':
 		try:
-			text = [k for k in request.form.to_dict().keys()][0]
+			text = request.form['text']
 		except:
 			text = ""
 		if not path.exists(f'./{ID}'):
@@ -37,7 +37,7 @@ def edit():
 		f = open(f'./{ID}/{ID}_{cur_day}.md', "w")
 		f.write(text)
 		f.close()
-	if path.exists(f'./{ID}/{ID}_{cur_day}.md'):
+	elif path.exists(f'./{ID}/{ID}_{cur_day}.md'):
 		text = open(f'./{ID}/{ID}_{cur_day}.md', "r").read()
 	return render_template("editor.html", text=text)
 
