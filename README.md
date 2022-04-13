@@ -10,4 +10,4 @@ To deploy the app yourself, just clone the repository, install the dependencies 
 python3 main.py
 ```
 
-for more details about fibonacci spaced learning visit [this page](https://aymanelotfi.github.io/learning_assistant/).
+For more details about fibonacci spaced learning visit [this page](https://aymanelotfi.github.io/learning_assistant/).
