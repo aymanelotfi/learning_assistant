@@ -56,7 +56,7 @@ def read():
 	text = ""
 	for d in texts:
 		text += d
-	return render_template("editor.html", text=text)
+	return render_template("reader.html", text=text)
 
 app = create_app() # we initialize our flask app using the __init__.py function
 if __name__ == '__main__':

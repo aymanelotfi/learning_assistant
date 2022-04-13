@@ -27,3 +27,6 @@ function relearnInit() {
 	  });
 
 }
+function test() {
+  document.querySelector("body > div > div.editor-toolbar > button.preview.no-disable").click();
+}
