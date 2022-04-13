@@ -25,7 +25,6 @@ def profile():
 @login_required
 def edit():
 	ID = current_user.id
-	print(date.today())
 	cur_day = (date.today()-start_day).days
 	text = ""
 	if request.method == 'POST':
@@ -48,11 +47,11 @@ def read():
 	texts = []
 	ID = current_user.id
 	day = (date.today()-start_day).days
-	fn = 0
+	fn = 1
 	fnn = 1
 	while day-fnn >= 0:
-		if path.exists(f'./{ID}/{ID}_{day-fnn}.md'):
-			texts.append("**Day " + str(-fnn)+"**\n\n"+open(f'./{ID}/{ID}_{day-fnn}.md', "r").read() + "\n\n")
+		if path.exists(f'./{ID}/{ID}_{day-fnn}.md') and str.strip(open(f'./{ID}/{ID}_{day-fnn}.md', "r").read()):
+			texts.append("**Day " + str(-fnn) + "**\n\n" + str.strip(open(f'./{ID}/{ID}_{day-fnn}.md', "r").read()) + "\n\n")
 		day -= fnn
 		fnn += fn
 		fn = fnn
