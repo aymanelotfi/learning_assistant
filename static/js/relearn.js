@@ -6,8 +6,7 @@
 //     http = result;
 // });
 function relearnInit() {
-  const easyMDE = new EasyMDE({element: document.getElementById('myTextarea')}, spellChecker = false);
-  easyMDE.value();
+  const easyMDE = new EasyMDE({element: document.getElementById('myTextarea'), spellChecker: false});
   easyMDE.codemirror.on("change", () => {
       console.log(easyMDE.value());
 		var url = "/edit";
