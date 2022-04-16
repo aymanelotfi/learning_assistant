@@ -6,8 +6,7 @@
 //     http = result;
 // });
 function relearnInit() {
-  const easyMDE = new EasyMDE({element: document.getElementById('myTextarea')});
-  easyMDE.value();
+  const easyMDE = new EasyMDE({element: document.getElementById('myTextarea'), spellChecker: false});
   easyMDE.codemirror.on("change", () => {
       console.log(easyMDE.value());
 		var url = "/edit";
@@ -17,7 +16,7 @@ function relearnInit() {
 		xhr.open('POST', '/edit');
 
 		// prepare form data
-		let data = easyMDE.value();
+		let data = "text=" + easyMDE.value();
 		// set headers
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');

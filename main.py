@@ -28,13 +28,16 @@ def edit():
 	cur_day = (date.today()-start_day).days
 	text = ""
 	if request.method == 'POST':
-		text = [k for k in request.form.to_dict().keys()][0]
+		try:
+			text = request.form['text']
+		except:
+			text = ""
 		if not path.exists(f'./{ID}'):
 			mkdir(f'./{ID}')
 		f = open(f'./{ID}/{ID}_{cur_day}.md', "w")
 		f.write(text)
 		f.close()
-	if path.exists(f'./{ID}/{ID}_{cur_day}.md'):
+	elif path.exists(f'./{ID}/{ID}_{cur_day}.md'):
 		text = open(f'./{ID}/{ID}_{cur_day}.md', "r").read()
 	return render_template("editor.html", text=text)
 
@@ -44,12 +47,11 @@ def read():
 	texts = []
 	ID = current_user.id
 	day = (date.today()-start_day).days
-	fn = 0
+	fn = 1
 	fnn = 1
-	while day >= 0:
-		if path.exists(f'./{ID}/{ID}_{day}.md'):
-			texts.append("**Day " + str(-day)+"**\n\n"+open(f'./{ID}/{ID}_{day}.md', "r").read() + "\n\n")
-		day -= fnn
+	while day-fnn >= 0:
+		if path.exists(f'./{ID}/{ID}_{day-fnn}.md') and str.strip(open(f'./{ID}/{ID}_{day-fnn}.md', "r").read()):
+			texts.append("**Day " + str(-fnn) + "**\n\n" + str.strip(open(f'./{ID}/{ID}_{day-fnn}.md', "r").read()) + "\n\n")
 		fnn += fn
 		fn = fnn
 	texts.reverse()
@@ -61,4 +63,4 @@ def read():
 app = create_app() # we initialize our flask app using the __init__.py function
 if __name__ == '__main__':
     db.create_all(app=create_app()) # create the SQLite database
-    app.run(debug=True) # run the flask app on debug mode
+    app.run(host='0.0.0.0', port=5001) # run the flask app on debug mode
