@@ -52,8 +52,9 @@ def read():
 	while day-fnn >= 0:
 		if path.exists(f'./{ID}/{ID}_{day-fnn}.md') and str.strip(open(f'./{ID}/{ID}_{day-fnn}.md', "r").read()):
 			texts.append("**Day " + str(-fnn) + "**\n\n" + str.strip(open(f'./{ID}/{ID}_{day-fnn}.md', "r").read()) + "\n\n")
-		fnn += fn
+		t = fn
 		fn = fnn
+		fnn += t
 	texts.reverse()
 	text = ""
 	for d in texts:
